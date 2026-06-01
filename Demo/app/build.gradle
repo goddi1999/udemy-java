@@ -34,7 +34,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'org.reutlingenuniversity.demo.App'
+    mainClass = 'org.reutlingenuniversity.yourproject.App'
 }
 
 tasks.named('test') {
