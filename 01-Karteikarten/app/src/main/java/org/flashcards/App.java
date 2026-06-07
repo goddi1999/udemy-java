@@ -13,18 +13,12 @@ public class App {
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
 
+        Game testGame = new Game();
+
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("How old are you ");
-        Integer age = scan.nextInt();
-        scan.nextLine(); // cleanup after nextInt()
+        testGame.setUp(scan);
 
-        System.err.println("you are " + age + " old");
-        
-        System.out.println("Tell me your name ? ");
-        String answer = scan.nextLine();
-
-        System.out.println("your name is: " + answer);
 
     } 
 }
