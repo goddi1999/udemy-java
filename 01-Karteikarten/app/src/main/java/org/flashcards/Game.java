@@ -6,78 +6,52 @@ import java.util.Scanner;
 
 public class  Game {
     // einen Score der korrekt beantworteten Karten 
-
     Integer score = 0;
     // Liste aller Karten speichern
     ArrayList<Card> cardsList = new ArrayList<>();
     
-    Scanner userInput = new Scanner(System.in);
-    
     public void logAllCards(){
         for(Card card : cardsList){
-            System.err.println("Q: " + card.getQuestion() );
-            System.err.println("A: " + card.getAnswer() );
+            System.err.println("Q: " + card.getQuestion());
+            System.err.println("A: " + card.getAnswer());
         }
     }
 
+    public void play(Scanner scanner){
+        System.out.println("\nTHE GAME STARTS.. HERE WE GO :) \n");
 
-    public void  play(Scanner scanner){
-        // Die gespeicherten Fragen werden nacheinander abgefragt.
-        for (Card card : cardsList) {
-            String currentCardQuestion = card.getQuestion();
-            String currentCardAnswer=  card.getAnswer();
-            
-        // Der Benutzer gibt eine Antwort ein, die mit der gespeicherten Antwort verglichen wird.
-            System.out.println("Q: " + currentCardQuestion);   
+        Integer totalRounds = cardsList.size() -1;
+        Integer currentRound = 0;
 
+        String cardQuestion =  cardsList.get(currentRound).getQuestion();
+        String cardAnswer =  cardsList.get(currentRound).getAnswer();
+
+
+        while(currentRound < totalRounds ){
+            System.out.println("Question number: " + currentRound + ": " + cardQuestion);
+           
+            // Der Benutzer gibt eine Antwort ein, die mit der gespeicherten Antwort verglichen wird.
             String userAnswer = scanner.nextLine();
 
-            boolean isAnswerCorrect =  userAnswer.contentEquals(currentCardAnswer);
-        
-        // Richtige Antworten erhöhen den Score u 1
-            if(isAnswerCorrect){
-               score = score + 1;
-            } 
+            if(userAnswer.equals(cardAnswer)){
+                // Richtige Antworten erhöhen den Score + 1
+                System.out.println("correct answer");
+                    score = score + 1;
+            }
+
+            currentRound = currentRound + 1;
         }
         // Am Ende wird der erreichte Score als Nachricht ausgegeben.
         System.out.println("Du hast den Score: " + score + " erreicht");   
-
     }
 
-    public void  play2(Scanner scanner, ArrayList<Card> cardList){
-        // Die gespeicherten Fragen werden nacheinander abgefragt.
-
-        for (int i = 0; i < cardList.size() -  1 ;i ++){
-
-            Card card =  cardList.get(i);
-            String currentCardQuestion = card.getQuestion();
-            String currentCardAnswer=  card.getAnswer();
-
-            // Der Benutzer gibt eine Antwort ein, die mit der gespeicherten Antwort verglichen wird.
-            System.out.println("Q: " + currentCardQuestion);
-            String userAnswer = scanner.nextLine();
-
-            boolean isAnswerCorrect =  userAnswer.contentEquals(currentCardAnswer);
-        
-            // Richtige Antworten erhöhen den Score u 1
-            if(isAnswerCorrect){
-               score = score + 1;
-            } 
-        }
-        // Am Ende wird der erreichte Score als Nachricht ausgegeben.
-        System.out.println("2 Du hast den Score: " + score + " erreicht");   
 
 
-
-
-    }
-
-    
-    public void setUp(Scanner scanner){
+   public void setup(Scanner scanner){
         boolean nextCard = true;
         
         while(nextCard){
-            System.out.println("Enter card question:");
+            System.out.println("Enter card question: ");
             String question = scanner.nextLine();
 
             // Implement retrieval of answer and adding of card to card list
@@ -90,18 +64,23 @@ public class  Game {
 
             System.out.println("\nflashcard saved... Question: " + currentCard.getQuestion() + " " + "Answer: "  + currentCard.getAnswer() + "\n");
 
-            System.out.println("Do you want to add a new card? (y/n)");
+            System.out.println("Do you want to add a new card? (y/n) (type n or any other key then (n) to terminate...");
             String input = scanner.nextLine();  
 
 
             // Implement follow up logic
-            if(input.contentEquals("n")){
+            if(input.equals("n")){
                 nextCard = false;
                 logAllCards();
 
-            } else if (input.contentEquals("y")){
-                setUp(userInput);
+            } else if (input.equals("y")){
+               nextCard = true;
+            }else {
+                nextCard  = false;
             }
         }
    }
+
+
+
 }

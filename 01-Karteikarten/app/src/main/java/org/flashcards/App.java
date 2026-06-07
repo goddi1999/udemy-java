@@ -6,19 +6,17 @@ package org.flashcards;
 import java.util.Scanner;
 
 public class App {
-    public String getGreeting() {
-        return "Karteikarten-01";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Game game = new Game();
+        // One scanner for global use
+        Scanner scanner = new Scanner(System.in);
+        // Build game
+        game.setup(scanner);
+        // Play game
+        game.play(scanner);
 
-        Game testGame = new Game();
-
-        Scanner scan = new Scanner(System.in);
-
-        testGame.setUp(scan);
-
+        scanner.close();
 
     } 
 }
