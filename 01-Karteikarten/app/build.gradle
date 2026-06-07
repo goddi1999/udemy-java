@@ -30,12 +30,13 @@ java {
     }
 }
 
+
 application {
     // Define the main class for the application.
-    mainClass = 'org.example.App'
+    mainClass = 'org.flashcards.App'
 }
 
-tasks.register('runExampleMethods', JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'org.example.ExampleMethods'
+
+tasks.named('run') {
+    standardInput = System.in
 }
