@@ -17,7 +17,14 @@ public class App {
 
         System.out.println("How old are you ");
         Integer age = scan.nextInt();
+        scan.nextLine(); // cleanup after nextInt()
 
         System.err.println("you are " + age + " old");
+        
+        System.out.println("Tell me your name ? ");
+        String answer = scan.nextLine();
+
+        System.out.println("your name is: " + answer);
+
     } 
 }
