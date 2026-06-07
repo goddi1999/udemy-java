@@ -15,19 +15,18 @@ public class  Game {
             System.err.println("Q: " + card.getQuestion());
             System.err.println("A: " + card.getAnswer());
         }
+
     }
 
     public void play(Scanner scanner){
         System.out.println("\nTHE GAME STARTS.. HERE WE GO :) \n");
 
-        Integer totalRounds = cardsList.size() -1;
+        Integer totalRounds = cardsList.size();
         Integer currentRound = 0;
 
-        String cardQuestion =  cardsList.get(currentRound).getQuestion();
-        String cardAnswer =  cardsList.get(currentRound).getAnswer();
-
-
         while(currentRound < totalRounds ){
+            String cardQuestion =  cardsList.get(currentRound).getQuestion();
+            String cardAnswer =  cardsList.get(currentRound).getAnswer();
             System.out.println("Question number: " + currentRound + ": " + cardQuestion);
            
             // Der Benutzer gibt eine Antwort ein, die mit der gespeicherten Antwort verglichen wird.
@@ -40,6 +39,7 @@ public class  Game {
             }
 
             currentRound = currentRound + 1;
+            System.out.println("updated round ->" + currentRound);
         }
         // Am Ende wird der erreichte Score als Nachricht ausgegeben.
         System.out.println("Du hast den Score: " + score + " erreicht");   
