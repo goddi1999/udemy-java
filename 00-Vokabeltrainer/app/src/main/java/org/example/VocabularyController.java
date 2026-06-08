@@ -41,8 +41,10 @@ public class VocabularyController {
         Vocabulary vocabularyItem = new Vocabulary(germanWord, englishWord);
         vocabularyList.add(vocabularyItem);
 
-        System.out.println("item added : " + vocabularyItem.toString());
-        cleanUpTextFields();
+        System.out.println("item added : " + vocabularyItem.toString()+ "\n");
+
+        System.out.println("List: " +  vocabularyList);
+
     }
 
     private void cleanUpTextFields(){
