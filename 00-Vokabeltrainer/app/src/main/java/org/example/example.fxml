@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+
+<GridPane fx:id="root" hgap="10.0" vgap="5.0"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="example.GameController">
+  <children>
+    <Label text="i love bacon" fx:id="topMessage" GridPane.halignment="CENTER"/>
+  </children>
+</GridPane>
