@@ -37,11 +37,14 @@ java {
     //     languageVersion = JavaLanguageVersion.of(21)
     // }
     toolchain {
-        languageVersion = JavaLanguageVersion.of(24)  // matches JavaFX 26
+        languageVersion = JavaLanguageVersion.of(26)
     }
 }
 
 application {
-    // Define the main class for the application.
     mainClass = 'org.example.App'
+}
+
+tasks.named('run') {
+    jvmArgs '--enable-native-access=javafx.graphics'
 }

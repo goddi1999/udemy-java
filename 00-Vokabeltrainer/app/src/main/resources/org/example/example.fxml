@@ -6,8 +6,8 @@
 
 <GridPane fx:id="root" hgap="10.0" vgap="5.0"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="example.GameController">
+          fx:controller="org.example.GameController">
   <children>
-    <Label text="i love bacon" fx:id="topMessage" GridPane.halignment="CENTER"/>
+    <Label text="i love bacon"/>
   </children>
 </GridPane>
