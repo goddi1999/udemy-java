@@ -35,7 +35,7 @@ public class Vocabulary {
   
     @Override 
     public String toString(){
-        return "GERMAN: " + getGermanWord() + "\tENGLISH: " + getEnglishWord() + "\n";
+        return getGermanWord()  + " " + getEnglishWord() + "\n";
     }
 
     @Override

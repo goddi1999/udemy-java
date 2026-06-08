@@ -13,5 +13,13 @@
     <Label fx:id="vocabularyLabel" text="Insert english word"/>
     <TextField fx:id="englishTextField" promptText="english word" />
 
-    <Button fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Click Me"/>
+    <Button fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
+
+   <ListView fx:id="vocabularyListView" prefHeight="200.0" />
+    
+    <Label fx:id="deleteVocabularyItemLabel" text="Type a german or english vocabulary to delete it"/>
+    <TextField fx:id="deleteVocabularyTextField" promptText="type word to delete vocabulary " />
+    <Button fx:id="deleteButton" onAction="#handleOnDeleteVocabulary" text="Delete Vocabulary"/>
+
+
 </VBox>
