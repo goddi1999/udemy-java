@@ -5,9 +5,9 @@
 <VBox xmlns:fx="http://javafx.com/fxml"
       spacing="10"
       style="-fx-padding: 20;"
-      fx:controller="org.example.VocabularyViewModel"
+      fx:controller="org.example.VocabularyController"
       >
-    <Label fx:id="submitLabel" text="insert german"/>
+    <Label fx:id="submitLabel" text="Insert german word"/>
     <TextField fx:id="germanTextField" promptText="german word" />
 
     <Label fx:id="vocabularyLabel" text="Insert english word"/>
