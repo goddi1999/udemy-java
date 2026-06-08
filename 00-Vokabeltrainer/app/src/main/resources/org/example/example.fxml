@@ -5,8 +5,13 @@
 <VBox xmlns:fx="http://javafx.com/fxml"
       spacing="10"
       style="-fx-padding: 20;"
-      fx:controller="org.example.GameController"
+      fx:controller="org.example.VocabularyViewModel"
       >
-    <Label fx:id="submitLabel" text="Hello, VBox!"/>
-    <Button fx:id="submitButton" onAction="#handleButtonClick" text="Click Me"/>
+    <Label fx:id="submitLabel" text="insert german"/>
+    <TextField fx:id="germanTextField" promptText="german word" />
+
+    <Label fx:id="vocabularyLabel" text="Insert english word"/>
+    <TextField fx:id="englishTextField" promptText="english word" />
+
+    <Button fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Click Me"/>
 </VBox>

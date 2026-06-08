@@ -21,7 +21,7 @@ public class App extends Application{
         Parent root = FXMLLoader.load(getClass().getResource ("example.fxml"));
 
         Scene scene = new Scene(root, 720, 800);
-        stage.setTitle("JavaFX");
+        stage.setTitle("Vocabulary Trainer");
         stage.setScene(scene);
         stage.show();
 
