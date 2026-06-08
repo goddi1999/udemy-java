@@ -2,12 +2,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-
-<GridPane fx:id="root" hgap="10.0" vgap="5.0"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="org.example.GameController">
-  <children>
-    <Label text="i love bacon"/>
-  </children>
-</GridPane>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      spacing="10"
+      style="-fx-padding: 20;"
+      fx:controller="org.example.GameController"
+      >
+    <Label fx:id="submitLabel" text="Hello, VBox!"/>
+    <Button fx:id="submitButton" onAction="#handleButtonClick" text="Click Me"/>
+</VBox>
