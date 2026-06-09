@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -51,6 +52,12 @@ public class VocabularyController {
     
     @FXML 
     private Label statusLabel;
+    
+    @FXML 
+    private Label allVocabularyLabel;
+
+    @FXML 
+    private ListView<Vocabulary> allVocabulary;
 
     
     @FXML
@@ -80,33 +87,51 @@ public class VocabularyController {
         boolean isDeleted = deleteVocabularyItem(currentUserInput);
 
        if(isDeleted){
+            statusLabel.setText("successfully deleted!");
+            statusLabel.setStyle("-fx-text-fill: green;");  
+            cleanUpTextFields();      
+       }else {
             statusLabel.setText("could not be deleted entry not found");
             statusLabel.setStyle("-fx-text-fill: red;");
-       }else {
-            statusLabel.setText("successfully deleted!");
-            statusLabel.setText("-fx-text-fill: green;");        
        }
     }
 
 
     private boolean deleteVocabularyItem(String userInput){
+        Vocabulary itemToDelete = null;
         boolean isDeleted = false;
+        
         if(userInput.isEmpty()){
             return isDeleted;
        }
-       
-       isDeleted =  vocabularyList.removeIf(vocabularyItem -> ( 
-            vocabularyItem.getEnglishWord().equals(userInput)|| 
-            vocabularyItem.getGermanWord().equals(userInput)
-        ));
+
+
+       // isDeleted =  vocabularyList.removeIf(vocabularyItem -> ( 
+        //     vocabularyItem.getEnglishWord().equals(userInput)|| 
+        //     vocabularyItem.getGermanWord().equals(userInput)
+        // ));
+
+
+        for (Vocabulary vocabularyItem : vocabularyList) {
+           if   (
+                vocabularyItem.getEnglishWord().equals(userInput)|| 
+                vocabularyItem.getGermanWord().equals(userInput)
+            ){
+                isDeleted = true;
+                itemToDelete = vocabularyItem;
+            } 
+        }
+
+        if (itemToDelete != null && isDeleted) {
+            vocabularyList.remove(itemToDelete);
+        }
 
        return isDeleted;
     }
 
- 
+     
 
     private void addVocabularyToList(String germanWord, String englishWord){
-
         if(germanWord.isEmpty() ||englishWord.isEmpty()){
             statusLabel.setText("one input field is empty!");
             statusLabel.setStyle("-fx-text-fill: red;");
@@ -132,6 +157,7 @@ public class VocabularyController {
     public void cleanUpTextFields(){
         germanTextField.setText("");
         englishTextField.setText("");
+        deleteVocabularyTextField.setText("");
     }
 
 }
