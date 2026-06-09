@@ -20,7 +20,9 @@
         </VBox>
     </HBox>
     </HBox>
-    <Label fx:id="statusLabel" text=""/>
+    <HBox spacing="10" alignment="CENTER">
+        <Label fx:id="statusLabel" text=""/>
+    </HBox>
     <HBox spacing="10" alignment="CENTER">
         <Button style="-fx-background-radius: 999px; -fx-border-radius: 999px; -fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 18px;" fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
     </HBox>

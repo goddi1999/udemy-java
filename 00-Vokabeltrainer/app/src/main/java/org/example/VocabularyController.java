@@ -74,17 +74,36 @@ public class VocabularyController {
 
     @FXML
     public void handleOnDeleteVocabulary(ActionEvent event){
-        String currentUserInput = deleteVocabularyTextField.getText();
+        String currentUserInput = deleteVocabularyTextField.getText().trim();
+        System.out.println("user input: " + currentUserInput);
 
-        deleteVocabularyItem(currentUserInput);
+        boolean isDeleted = deleteVocabularyItem(currentUserInput);
+
+       if(isDeleted){
+            statusLabel.setText("could not be deleted entry not found");
+            statusLabel.setStyle("-fx-text-fill: red;");
+       }else {
+            statusLabel.setText("successfully deleted!");
+            statusLabel.setText("-fx-text-fill: green;");        
+       }
     }
 
 
-    private void deleteVocabularyItem(String userInput){
+    private boolean deleteVocabularyItem(String userInput){
+        boolean isDeleted = false;
+        if(userInput.isEmpty()){
+            return isDeleted;
+       }
+       
+       isDeleted =  vocabularyList.removeIf(vocabularyItem -> ( 
+            vocabularyItem.getEnglishWord().equals(userInput)|| 
+            vocabularyItem.getGermanWord().equals(userInput)
+        ));
 
-
-
+       return isDeleted;
     }
+
+ 
 
     private void addVocabularyToList(String germanWord, String englishWord){
 
