@@ -12,8 +12,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-
-
 public class VocabularyController {
     private  ObservableList<Vocabulary> vocabularyList = FXCollections.observableArrayList();
 
