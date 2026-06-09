@@ -8,6 +8,7 @@
       fx:controller="org.example.VocabularyController">
 
     <HBox alignment="CENTER">
+    
     <HBox spacing="10">
         <VBox>
             <Label fx:id="submitLabel" text="Insert german word"/>
@@ -19,8 +20,9 @@
         </VBox>
     </HBox>
     </HBox>
+    <Label fx:id="statusLabel" text=""/>
     <HBox spacing="10" alignment="CENTER">
-        <Button   style="-fx-border-radius: 20px; -fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 14px;" fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
+        <Button style="-fx-background-radius: 999px; -fx-border-radius: 999px; -fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 18px;" fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
     </HBox>
     <TableView fx:id="vocabularyTable">
     <columns>
@@ -32,7 +34,7 @@
 </TableView>
     <Label fx:id="deleteVocabularyItemLabel" text="Type a german or english vocabulary to delete it"/>
     <TextField fx:id="deleteVocabularyTextField" promptText="type word to delete vocabulary " />
-    <Button fx:id="deleteButton" onAction="#handleOnDeleteVocabulary" text="Delete Vocabulary"/>
+    <Button style="-fx-background-radius: 999px; -fx-border-radius: 999px; -fx-background-color: #FF6B6B; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 18px;" fx:id="deleteButton"    onAction="#handleOnDeleteVocabulary" text="Delete Vocabulary"/>
 
 
 </VBox>

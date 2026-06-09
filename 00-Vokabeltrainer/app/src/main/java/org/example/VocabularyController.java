@@ -49,6 +49,10 @@ public class VocabularyController {
     @FXML
     private TableColumn<Vocabulary, String> englishColumn;
     
+    @FXML 
+    private Label statusLabel;
+
+    
     @FXML
     private void initialize() {
         System.out.println("controller running bind fxml to java....");
@@ -64,8 +68,6 @@ public class VocabularyController {
         String  germanWord = germanTextField.getText().trim();
         String englishWord = englishTextField.getText().trim();
 
-        
-
         addVocabularyToList(germanWord, englishWord);
 
     }
@@ -73,11 +75,22 @@ public class VocabularyController {
     @FXML
     public void handleOnDeleteVocabulary(ActionEvent event){
         String currentUserInput = deleteVocabularyTextField.getText();
+
+        deleteVocabularyItem(currentUserInput);
+    }
+
+
+    private void deleteVocabularyItem(String userInput){
+
+
+
     }
 
     private void addVocabularyToList(String germanWord, String englishWord){
 
         if(germanWord.isEmpty() ||englishWord.isEmpty()){
+            statusLabel.setText("one input field is empty!");
+            statusLabel.setStyle("-fx-text-fill: red;");
             System.out.println("input field is empty, not adding");
             return;
         }
@@ -86,10 +99,14 @@ public class VocabularyController {
         if (!vocabularyList.contains(vocabularyItem)) {
             vocabularyList.add(vocabularyItem);
             System.out.println("item added : " + vocabularyItem.toString()+ "\n");
+            statusLabel.setText("item added !");
+            statusLabel.setStyle("-fx-text-fill: green;");
             cleanUpTextFields();
 
         } else {
             System.out.println("Duplicate, not adding");
+            statusLabel.setText("Duplicate, not adding!");
+            statusLabel.setStyle("-fx-text-fill: red;");
         }
     }
 
