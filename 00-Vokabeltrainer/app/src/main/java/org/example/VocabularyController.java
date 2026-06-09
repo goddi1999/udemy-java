@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 
@@ -51,7 +52,10 @@ public class VocabularyController {
     @FXML
     private void initialize() {
         System.out.println("controller running bind fxml to java....");
-        
+
+        germanColumn.setCellValueFactory(new PropertyValueFactory<>("germanWord"));
+        englishColumn.setCellValueFactory(new PropertyValueFactory<>("englishWord"));
+
         vocabularyTable.setItems(vocabularyList);
         
     }
@@ -60,8 +64,11 @@ public class VocabularyController {
     public void handleOnSaveVocabulary(ActionEvent event){
         String  germanWord = germanTextField.getText();
         String englishWord = englishTextField.getText();
+        
+        System.out.println("DE, EN " + germanWord + " " + englishWord);
 
-    
+        addVocabularyToList(germanWord, englishWord);
+
         cleanUpTextFields();
 
     }
@@ -73,7 +80,7 @@ public class VocabularyController {
     }
 
 
-    private void updateVocabularyList(String germanWord, String englishWord){
+    private void addVocabularyToList(String germanWord, String englishWord){
         Vocabulary vocabularyItem = new Vocabulary(germanWord, englishWord);
 
         if (!vocabularyList.contains(vocabularyItem)) {

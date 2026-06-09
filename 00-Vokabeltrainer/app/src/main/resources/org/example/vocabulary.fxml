@@ -14,13 +14,8 @@
     <TableView fx:id="vocabularyTable">
     <columns>
         <TableColumn fx:id="germanColumn" text="German" prefWidth="100">
-            <cellValueFactory>
-            </cellValueFactory>
         </TableColumn>
-
         <TableColumn fx:id="englishColumn" text="English" prefWidth="100">
-            <cellValueFactory>
-            </cellValueFactory>
         </TableColumn>
     </columns>
 </TableView>
