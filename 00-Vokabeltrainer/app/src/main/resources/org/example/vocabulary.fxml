@@ -5,18 +5,25 @@
 <VBox xmlns:fx="http://javafx.com/fxml"
       spacing="10"
       style="-fx-padding: 20;"
-      fx:controller="org.example.VocabularyController"
-      >
+      fx:controller="org.example.VocabularyController">
     <Label fx:id="submitLabel" text="Insert german word"/>
     <TextField fx:id="germanTextField" promptText="german word" />
-
     <Label fx:id="vocabularyLabel" text="Insert english word"/>
     <TextField fx:id="englishTextField" promptText="english word" />
-
     <Button fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
+    <TableView fx:id="vocabularyTable">
+    <columns>
+        <TableColumn fx:id="germanColumn" text="German" prefWidth="100">
+            <cellValueFactory>
+            </cellValueFactory>
+        </TableColumn>
 
-   <ListView fx:id="vocabularyListView" prefHeight="200.0" />
-    
+        <TableColumn fx:id="englishColumn" text="English" prefWidth="100">
+            <cellValueFactory>
+            </cellValueFactory>
+        </TableColumn>
+    </columns>
+</TableView>
     <Label fx:id="deleteVocabularyItemLabel" text="Type a german or english vocabulary to delete it"/>
     <TextField fx:id="deleteVocabularyTextField" promptText="type word to delete vocabulary " />
     <Button fx:id="deleteButton" onAction="#handleOnDeleteVocabulary" text="Delete Vocabulary"/>

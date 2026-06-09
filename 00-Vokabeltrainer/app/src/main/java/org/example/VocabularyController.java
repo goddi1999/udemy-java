@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -31,12 +31,6 @@ public class VocabularyController {
     private Label vocabularyLabel;
 
     @FXML
-    private TableView vocabularyTable;
-
-    @FXML
-    private ListView<Vocabulary> vocabularyListView;
-    
-    @FXML
     private Button deleteButton;
     
     @FXML
@@ -45,19 +39,28 @@ public class VocabularyController {
     @FXML
     private TextField deleteVocabularyTextField;
 
-   @FXML
-   private void initialize() {
-        System.out.println("controller running....");
-        // binds the fxml listView to th eobserable list which auto listen to updates
-        vocabularyListView.setItems(vocabularyList);
-    }
+    @FXML
+    private TableView<Vocabulary> vocabularyTable;
 
+    @FXML
+    private TableColumn<Vocabulary, String> germanColumn;
+
+    @FXML
+    private TableColumn<Vocabulary, String> englishColumn;
+    
+    @FXML
+    private void initialize() {
+        System.out.println("controller running bind fxml to java....");
+        
+        vocabularyTable.setItems(vocabularyList);
+        
+    }
+    
     @FXML
     public void handleOnSaveVocabulary(ActionEvent event){
         String  germanWord = germanTextField.getText();
         String englishWord = englishTextField.getText();
 
-        updateVocabularyList(germanWord, englishWord);
     
         cleanUpTextFields();
 
@@ -65,11 +68,9 @@ public class VocabularyController {
 
     @FXML
     public void handleOnDeleteVocabulary(ActionEvent event){
-
         String currentUserInput = deleteVocabularyTextField.getText();
     
     }
-
 
 
     private void updateVocabularyList(String germanWord, String englishWord){
