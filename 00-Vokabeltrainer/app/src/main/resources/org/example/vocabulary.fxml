@@ -6,11 +6,22 @@
       spacing="10"
       style="-fx-padding: 20;"
       fx:controller="org.example.VocabularyController">
-    <Label fx:id="submitLabel" text="Insert german word"/>
-    <TextField fx:id="germanTextField" promptText="german word" />
-    <Label fx:id="vocabularyLabel" text="Insert english word"/>
-    <TextField fx:id="englishTextField" promptText="english word" />
-    <Button fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
+
+    <HBox alignment="CENTER">
+    <HBox spacing="10">
+        <VBox>
+            <Label fx:id="submitLabel" text="Insert german word"/>
+            <TextField fx:id="germanTextField" promptText="german word" />
+        </VBox>
+        <VBox>
+            <Label fx:id="vocabularyLabel" text="Insert english word"/>
+            <TextField fx:id="englishTextField" promptText="english word" />
+        </VBox>
+    </HBox>
+    </HBox>
+    <HBox spacing="10" alignment="CENTER">
+        <Button   style="-fx-border-radius: 20px; -fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 14px;" fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
+    </HBox>
     <TableView fx:id="vocabularyTable">
     <columns>
         <TableColumn fx:id="germanColumn" text="German" prefWidth="100">

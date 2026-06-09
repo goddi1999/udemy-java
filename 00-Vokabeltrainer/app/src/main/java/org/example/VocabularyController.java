@@ -56,36 +56,38 @@ public class VocabularyController {
         germanColumn.setCellValueFactory(new PropertyValueFactory<>("germanWord"));
         englishColumn.setCellValueFactory(new PropertyValueFactory<>("englishWord"));
 
-        vocabularyTable.setItems(vocabularyList);
-        
+        vocabularyTable.setItems(vocabularyList); 
     }
     
     @FXML
     public void handleOnSaveVocabulary(ActionEvent event){
-        String  germanWord = germanTextField.getText();
-        String englishWord = englishTextField.getText();
+        String  germanWord = germanTextField.getText().trim();
+        String englishWord = englishTextField.getText().trim();
+
         
-        System.out.println("DE, EN " + germanWord + " " + englishWord);
 
         addVocabularyToList(germanWord, englishWord);
-
-        cleanUpTextFields();
 
     }
 
     @FXML
     public void handleOnDeleteVocabulary(ActionEvent event){
         String currentUserInput = deleteVocabularyTextField.getText();
-    
     }
 
-
     private void addVocabularyToList(String germanWord, String englishWord){
+
+        if(germanWord.isEmpty() ||englishWord.isEmpty()){
+            System.out.println("input field is empty, not adding");
+            return;
+        }
         Vocabulary vocabularyItem = new Vocabulary(germanWord, englishWord);
 
         if (!vocabularyList.contains(vocabularyItem)) {
             vocabularyList.add(vocabularyItem);
             System.out.println("item added : " + vocabularyItem.toString()+ "\n");
+            cleanUpTextFields();
+
         } else {
             System.out.println("Duplicate, not adding");
         }
