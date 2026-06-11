@@ -42,7 +42,7 @@ java {
 }
 
 application {
-    mainClass = 'org.example.App'
+    mainClass = 'reutlingenuniversity.vocabtrainer.App'
 }
 
 tasks.named('run') {

@@ -1,5 +1,6 @@
-package org.example;
+package reutlingenuniversity.vocabtrainer.viewmodel;
 
+import reutlingenuniversity.vocabtrainer.model.Vocabulary;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

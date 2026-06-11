@@ -5,7 +5,7 @@
 
 
 <TabPane xmlns="http://javafx.com/javafx"
-    xmlns:fx="http://javafx.com/fxml" style="-fx-padding: 20;" fx:controller="org.example.VocabularyController">
+    xmlns:fx="http://javafx.com/fxml" style="-fx-padding: 20;" fx:controller="reutlingenuniversity.vocabtrainer.viewmodel.VocabularyController">
 
     <tabs>
         <!-- Tab 1 -->

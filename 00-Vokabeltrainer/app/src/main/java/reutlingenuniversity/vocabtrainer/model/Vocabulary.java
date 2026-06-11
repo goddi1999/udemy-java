@@ -1,4 +1,4 @@
-package  org.example;
+package reutlingenuniversity.vocabtrainer.model;
 
 import java.util.Objects;
 
@@ -56,11 +56,4 @@ public class Vocabulary {
     public int hashCode(){
         return Objects.hash(germanWord, englishWord);
     }
-
- 
-
-
-    
-
-
 }
