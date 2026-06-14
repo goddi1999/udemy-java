@@ -1,20 +1,29 @@
 package reutlingenuniversity.vocabtrainer.viewmodel;
 
-import reutlingenuniversity.vocabtrainer.model.Vocabulary;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import reutlingenuniversity.vocabtrainer.model.Vocabulary;
 
 public class VocabularyController {
     private  ObservableList<Vocabulary> vocabularyList = FXCollections.observableArrayList();
+    public enum Direction {
+        DE,
+        EN
+    }
+    private Direction direction = Direction.DE;   
+      
 
     @FXML
     private Button submitButton;
@@ -58,6 +67,82 @@ public class VocabularyController {
     @FXML 
     private ListView<Vocabulary> allVocabulary;
 
+    @FXML
+    private Button loadFileButton;
+
+    @FXML
+    private TextField loadFileTextField;
+
+    @FXML
+    private Label loadFileLabel;
+
+    @FXML
+    private Button trainButton;
+
+    @FXML
+    private TextField trainTextField;
+
+    @FXML
+    private Label randomWord;
+
+    @FXML
+    private Label trainFeedbackLabel;
+
+    @FXML
+    private TabPane vocabTab;
+
+    @FXML
+    private Tab trainTab;
+
+
+    @FXML 
+    private Button changeDirection;
+
+    @FXML
+    private Button nextWord;
+
+
+
+
+
+    @FXML
+    private void handleChangeDirection(){
+        trainTextField.setText("");
+        direction = direction == Direction.DE ? Direction.EN : Direction.DE;
+        System.out.println("change direction to ...." + direction);
+
+        String randomWordByIndex = getRandomWordFromVocabularyList(vocabularyList, direction);
+        randomWord.setText(randomWordByIndex);
+    }
+
+
+    @FXML
+    private void handleOnLoadFile(){
+
+        // get path 
+        // check if file exist
+        // iterate through the file 
+        // push iteration to the list 
+
+    }
+
+    @FXML
+    private void saveFileButton(){
+
+
+        // save current vocabulary list in one file always 
+
+        // on save you do not overwrite you append the values if not it creates it
+    }
+  
+    
+    @FXML
+    private void handleNextWord(){
+        String randomWordByIndex = getRandomWordFromVocabularyList(vocabularyList, direction);
+        System.out.println("direction" + direction + " " + randomWordByIndex);
+        randomWord.setText(randomWordByIndex);
+    }
+
     
     @FXML
     private void initialize() {
@@ -67,6 +152,26 @@ public class VocabularyController {
         englishColumn.setCellValueFactory(new PropertyValueFactory<>("englishWord"));
 
         vocabularyTable.setItems(vocabularyList); 
+
+        // render random first vocabulary on Tab view
+        vocabTab.getSelectionModel()
+        .selectedIndexProperty()
+        .addListener((obs, oldTabIndex, newTabIndex)-> {
+            // System.err.println("obs: " +  obs);
+            // System.err.println("oldTab: " +  oldTab);
+            // System.err.println("newTab: " +  newTab);
+        
+            int listLength =  vocabularyList.size();
+            if((int)newTabIndex ==  2 && listLength > 0 ){
+                String randomWordByIndex = getRandomWordFromVocabularyList(vocabularyList, direction);
+                randomWord.setText(randomWordByIndex);
+            }      
+        });
+    }
+
+    @FXML
+    private void handleOnSaveFile(){
+
     }
     
     @FXML
@@ -79,11 +184,36 @@ public class VocabularyController {
     }
 
     @FXML
+    public void handleCheckAnswer(ActionEvent event){
+        // get the current input value 
+        String currentUserInput = trainTextField.getText().trim();  
+
+        if(currentUserInput.isEmpty()){
+            return; 
+        }
+
+        // compare it user input with current vocabulary
+        System.out.println("direction" + direction + " " + currentUserInput);
+
+        if(compareUserInputWithCurrentVocabulary(currentUserInput, direction))
+            {
+                trainFeedbackLabel.setText("Correct well done !");
+                trainFeedbackLabel.setStyle("-fx-text-fill: green;");  
+                
+
+            }else {
+                trainFeedbackLabel.setText("not correct");
+                trainFeedbackLabel.setStyle("-fx-text-fill: red;");
+            }
+    }
+
+    @FXML
     public void handleOnDeleteVocabulary(ActionEvent event){
         String currentUserInput = deleteVocabularyTextField.getText().trim();
         System.out.println("user input: " + currentUserInput);
 
         boolean isDeleted = deleteVocabularyItem(currentUserInput);
+        System.out.println("isDeleted: " + isDeleted);
 
        if(isDeleted){
             statusLabel.setText("successfully deleted!");
@@ -95,6 +225,49 @@ public class VocabularyController {
        }
     }
 
+    public void showInfo(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText(null);            
+        alert.setContentText(message);
+        alert.showAndWait();                  
+    }
+
+    private String getRandomWordFromVocabularyList(
+        ObservableList<Vocabulary> vocabularyList, 
+        Direction direction
+    ){   
+        if (vocabularyList.isEmpty()) {
+            return "";
+        }
+
+        int listLength =  vocabularyList.size();
+        int randomIndex = (int)(Math.random() * (listLength));
+
+        String  currentRandomWord =  direction == Direction.DE ?  
+                vocabularyList.get(randomIndex).getGermanWord(): 
+                vocabularyList.get(randomIndex).getEnglishWord();
+
+        return currentRandomWord;
+    }
+
+
+    private boolean compareUserInputWithCurrentVocabulary (String userInput,  Direction direction){
+        boolean isEqual = false;
+
+        for (Vocabulary vocabularyItem : vocabularyList) {
+            if   (
+                    vocabularyItem.getEnglishWord().equals(userInput)|| 
+                    vocabularyItem.getGermanWord().equals(userInput)
+                ){
+                    String word  = direction == Direction.EN ?  
+                    vocabularyItem.getGermanWord(): 
+                    vocabularyItem.getEnglishWord();
+                    isEqual = userInput.equals(word);
+                } 
+            }
+            return isEqual;
+    }
 
     private boolean deleteVocabularyItem(String userInput){
         Vocabulary itemToDelete = null;
@@ -103,13 +276,6 @@ public class VocabularyController {
         if(userInput.isEmpty()){
             return isDeleted;
        }
-
-
-       // isDeleted =  vocabularyList.removeIf(vocabularyItem -> ( 
-        //     vocabularyItem.getEnglishWord().equals(userInput)|| 
-        //     vocabularyItem.getGermanWord().equals(userInput)
-        // ));
-
 
         for (Vocabulary vocabularyItem : vocabularyList) {
            if   (
@@ -128,7 +294,6 @@ public class VocabularyController {
        return isDeleted;
     }
 
-     
 
     private void addVocabularyToList(String germanWord, String englishWord){
         if(germanWord.isEmpty() ||englishWord.isEmpty()){

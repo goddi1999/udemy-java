@@ -4,12 +4,12 @@
 
 
 
-<TabPane xmlns="http://javafx.com/javafx"
+<TabPane fx:id="vocabTab"
+    xmlns="http://javafx.com/javafx"
     xmlns:fx="http://javafx.com/fxml" style="-fx-padding: 20;" fx:controller="reutlingenuniversity.vocabtrainer.viewmodel.VocabularyController">
-
     <tabs>
         <!-- Tab 1 -->
-        <Tab text="Eingabe" closable="false">
+        <Tab text="Overview" closable="false">
             <content>
                 <VBox>
                     <HBox alignment="CENTER">
@@ -28,32 +28,52 @@
                         <Label fx:id="statusLabel" text=""/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER">
-                        <Button style="-fx-background-radius: 999px; -fx-border-radius: 999px; -fx-background-color: #0000FF; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 18px;" fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
+                        <Button fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
                     </HBox>
-                    <TableView fx:id="vocabularyTable">
-                        <columns>
-                            <TableColumn fx:id="germanColumn" text="German" prefWidth="100">
-                            </TableColumn>
-                            <TableColumn fx:id="englishColumn" text="English" prefWidth="100">
-                            </TableColumn>
-                        </columns>
-                    </TableView>
-                    <Label fx:id="deleteVocabularyItemLabel" text="Type a german or english vocabulary to delete it"/>
-                    <TextField fx:id="deleteVocabularyTextField" promptText="type word to delete vocabulary " />
-                    <Button style="-fx-background-radius: 999px; -fx-border-radius: 999px; -fx-background-color: #FF6B6B; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 18px;" fx:id="deleteButton" onAction="#handleOnDeleteVocabulary" text="Delete Vocabulary"/>
+
+                    <VBox spacing="10" style="-fx-padding: 10px">
+                        <Label fx:id="deleteVocabularyItemLabel" text="Type a german or english vocabulary to delete it"/>
+                        <TextField fx:id="deleteVocabularyTextField" promptText="type word to delete vocabulary " />
+                        <Button fx:id="deleteButton" onAction="#handleOnDeleteVocabulary" text="Delete Vocabulary"/>
+                    </VBox>
+                    <VBox/>
+                    <VBox spacing="10" style="-fx-padding: 10px">
+                        <Label fx:id="loadFileLabel" text="paste in path to load vocabularies"/>
+                        <TextField fx:id="loadFileTextField"/>
+                        <Button fx:id="loadFileButton" text="load Deck" onAction="#handleOnLoadFile" />
+                        <Button fx:id="saveFileButton" text="Save Deck" onAction="#handleOnSaveFile" />
+                    </VBox>
                 </VBox>
             </content>
-            </Tab>
+        </Tab>
+        <!-- Tab 2 -->
+        <Tab text="All Vocabularies" closable="false">
+            <content>
+                <TableView fx:id="vocabularyTable">
+                    <columns>
+                        <TableColumn fx:id="germanColumn" text="German" prefWidth="100">
+                        </TableColumn>
+                        <TableColumn fx:id="englishColumn" text="English" prefWidth="100">
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </content>
+        </Tab>
+        <!-- Tab 3 -->
+        <Tab fx:id="trainTab" text="Train" closable="false">
+            <content>
+                <VBox spacing="10" style="-fx-padding: 10px">
+                    <Label fx:id="trainFeedbackLabel" />
+                    <Label style="-fx-font-weight: bold;  -fx-text-fill: black; -fx-alignment: center;" fx:id="randomWord"/>
+                    <TextField fx:id="trainTextField"/>
+                    <HBox spacing="10">
+                        <Button fx:id="trainButton" text="check answer" onAction="#handleCheckAnswer" />
+                        <Button fx:id="changeDirection" text="change direction" onAction="#handleChangeDirection" />
+                        <Button fx:id="nextWord" text="next >" onAction="#handleNextWord" />
+                    </HBox>
+                </VBox>
+            </content>
+        </Tab>
 
-            <!-- Tab 2 -->
-            <Tab text="list" closable="false">
-                <content>
-                    <VBox spacing="10" style="-fx-padding: 10;">
-                        <Label fx:id="allVocabularyLabel" text="Saved Vocabulary" />
-                        <ListView fx:id="allVocabulary" prefHeight="200" />
-                    </VBox>
-                </content>
-            </Tab>
-
-        </tabs>
-    </TabPane>
+    </tabs>
+</TabPane>
