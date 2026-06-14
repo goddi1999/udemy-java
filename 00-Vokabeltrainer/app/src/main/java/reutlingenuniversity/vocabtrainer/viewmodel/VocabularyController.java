@@ -1,5 +1,13 @@
 package reutlingenuniversity.vocabtrainer.viewmodel;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -102,9 +110,6 @@ public class VocabularyController {
     private Button nextWord;
 
 
-
-
-
     @FXML
     private void handleChangeDirection(){
         trainTextField.setText("");
@@ -117,24 +122,56 @@ public class VocabularyController {
 
 
     @FXML
-    private void handleOnLoadFile(){
+    private void handleOnLoadFile() {
+        String filePath = loadFileTextField.getText().trim();
+        if (filePath.isEmpty()) {
+            showError("Please enter a file path.");
+            return;
+        }
 
-        // get path 
-        // check if file exist
-        // iterate through the file 
-        // push iteration to the list 
+        File file = new File(filePath);
+        if (!file.exists() || !file.isFile()) {
+            statusLabel.setText("File not found!");
+            statusLabel.setStyle("-fx-text-fill: red;");
+            showError("File not found: " + filePath);
+            return;
+        }
 
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) {
+                    continue;
+                }
+
+                String[] parts = line.split(",", 2);
+                if (parts.length != 2) {
+                    continue;
+                }
+
+                String germanWord = parts[0].trim();
+                String englishWord = parts[1].trim();
+                if (germanWord.isEmpty() || englishWord.isEmpty()) {
+                    continue;
+                }
+
+                Vocabulary vocabularyItem = new Vocabulary(germanWord, englishWord);
+                if (!vocabularyList.contains(vocabularyItem)) {
+                    vocabularyList.add(vocabularyItem);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            statusLabel.setText("Error loading file!");
+            statusLabel.setStyle("-fx-text-fill: red;");
+            showError("File not found: " + filePath);
+        } catch (IOException e) {
+            statusLabel.setText("Error loading file!");
+            statusLabel.setStyle("-fx-text-fill: red;");
+            showError("Error reading file: " + e.getMessage());
+        }
     }
 
-    @FXML
-    private void saveFileButton(){
-
-
-        // save current vocabulary list in one file always 
-
-        // on save you do not overwrite you append the values if not it creates it
-    }
-  
     
     @FXML
     private void handleNextWord(){
@@ -170,8 +207,34 @@ public class VocabularyController {
     }
 
     @FXML
-    private void handleOnSaveFile(){
+    private void handleOnSaveFile() {
+        String filePath = loadFileTextField.getText().trim();
+        if (filePath.isEmpty()) {
+            showError("Please enter a file path.");
+            return;
+        }
 
+        if (vocabularyList.isEmpty()) {
+            statusLabel.setText("Nothing to save!");
+            statusLabel.setStyle("-fx-text-fill: red;");
+            showError("No vocabulary entries to save.");
+            return;
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            for (Vocabulary vocabularyItem : vocabularyList) {
+                writer.write(vocabularyItem.getGermanWord()
+                        + ","
+                        + vocabularyItem.getEnglishWord());
+                writer.newLine();
+            }
+            statusLabel.setText("Vocabulary saved successfully!");
+            statusLabel.setStyle("-fx-text-fill: green;");
+        } catch (IOException e) {
+            statusLabel.setText("Error saving file!");
+            statusLabel.setStyle("-fx-text-fill: red;");
+            showError("Error saving file: " + e.getMessage());
+        }
     }
     
     @FXML
@@ -228,9 +291,17 @@ public class VocabularyController {
     public void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Info");
-        alert.setHeaderText(null);            
+        alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait();                  
+        alert.showAndWait();
+    }
+
+    public void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private String getRandomWordFromVocabularyList(

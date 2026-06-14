@@ -11,37 +11,35 @@
         <!-- Tab 1 -->
         <Tab text="Overview" closable="false">
             <content>
-                <VBox>
-                    <HBox alignment="CENTER">
-                        <HBox spacing="10">
-                            <VBox>
-                                <Label fx:id="submitLabel" text="Insert german word"/>
-                                <TextField fx:id="germanTextField" promptText="german word" />
-                            </VBox>
-                            <VBox>
-                                <Label fx:id="vocabularyLabel" text="Insert english word"/>
-                                <TextField fx:id="englishTextField" promptText="english word" />
-                            </VBox>
-                        </HBox>
-                    </HBox>
-                    <HBox spacing="10" alignment="CENTER">
-                        <Label fx:id="statusLabel" text=""/>
-                    </HBox>
-                    <HBox spacing="10" alignment="CENTER">
+                <VBox spacing="25" alignment="CENTER" style="-fx-padding: 20px">
+                    <VBox spacing="10" alignment="CENTER" maxWidth="500">
+                        <GridPane hgap="15" vgap="5" alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="200" prefWidth="200" maxWidth="200"/>
+                                <ColumnConstraints minWidth="200" prefWidth="200" maxWidth="200"/>
+                            </columnConstraints>
+                            <Label fx:id="submitLabel" text="German word" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Label fx:id="vocabularyLabel" text="English word" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            <TextField fx:id="germanTextField" promptText="German word" prefWidth="200" maxWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <TextField fx:id="englishTextField" promptText="English word" prefWidth="200" maxWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        </GridPane>
+                        <Label fx:id="statusLabel" text="" style="-fx-text-alignment: center;"/>
                         <Button fx:id="submitButton" onAction="#handleOnSaveVocabulary" text="Add Vocabulary"/>
-                    </HBox>
+                    </VBox>
 
-                    <VBox spacing="10" style="-fx-padding: 10px">
-                        <Label fx:id="deleteVocabularyItemLabel" text="Type a german or english vocabulary to delete it"/>
-                        <TextField fx:id="deleteVocabularyTextField" promptText="type word to delete vocabulary " />
+                    <VBox spacing="10" alignment="CENTER" maxWidth="500">
+                        <Label fx:id="deleteVocabularyItemLabel" text="Enter a German or English word to delete" alignment="CENTER" wrapText="true" maxWidth="300" prefWidth="300"/>
+                        <TextField fx:id="deleteVocabularyTextField" promptText="Word to delete" prefWidth="300" maxWidth="300"/>
                         <Button fx:id="deleteButton" onAction="#handleOnDeleteVocabulary" text="Delete Vocabulary"/>
                     </VBox>
-                    <VBox/>
-                    <VBox spacing="10" style="-fx-padding: 10px">
-                        <Label fx:id="loadFileLabel" text="paste in path to load vocabularies"/>
-                        <TextField fx:id="loadFileTextField"/>
-                        <Button fx:id="loadFileButton" text="load Deck" onAction="#handleOnLoadFile" />
-                        <Button fx:id="saveFileButton" text="Save Deck" onAction="#handleOnSaveFile" />
+
+                    <VBox spacing="10" alignment="CENTER" maxWidth="500">
+                        <Label fx:id="loadFileLabel" text="Enter file path to load or save vocabulary (format: german,english per line)" alignment="CENTER" wrapText="true" maxWidth="400" prefWidth="400"/>
+                        <TextField fx:id="loadFileTextField" promptText="e.g. /Users/name/vocabulary.txt" prefWidth="400" maxWidth="400"/>
+                        <HBox spacing="10" alignment="CENTER">
+                            <Button fx:id="loadFileButton" text="Load Deck" onAction="#handleOnLoadFile" />
+                            <Button fx:id="saveFileButton" text="Save Deck" onAction="#handleOnSaveFile" />
+                        </HBox>
                     </VBox>
                 </VBox>
             </content>
@@ -62,16 +60,18 @@
         <!-- Tab 3 -->
         <Tab fx:id="trainTab" text="Train" closable="false">
             <content>
-                <VBox spacing="10" style="-fx-padding: 10px">
-                    <Label fx:id="trainFeedbackLabel" />
-                    <Label style="-fx-font-weight: bold;  -fx-text-fill: black; -fx-alignment: center;" fx:id="randomWord"/>
-                    <TextField fx:id="trainTextField"/>
-                    <HBox spacing="10">
-                        <Button fx:id="trainButton" text="check answer" onAction="#handleCheckAnswer" />
-                        <Button fx:id="changeDirection" text="change direction" onAction="#handleChangeDirection" />
-                        <Button fx:id="nextWord" text="next >" onAction="#handleNextWord" />
-                    </HBox>
-                </VBox>
+                <StackPane style="-fx-padding: 20px">
+                    <VBox spacing="15" alignment="CENTER" maxWidth="400" prefWidth="400">
+                        <Label fx:id="trainFeedbackLabel" alignment="CENTER" wrapText="true" maxWidth="400" prefWidth="400"/>
+                        <Label fx:id="randomWord" alignment="CENTER" wrapText="true" maxWidth="400" prefWidth="400" style="-fx-font-weight: bold; -fx-font-size: 18px;"/>
+                        <TextField fx:id="trainTextField" prefWidth="280" maxWidth="280"/>
+                        <HBox spacing="10" alignment="CENTER">
+                            <Button fx:id="trainButton" text="check answer" onAction="#handleCheckAnswer" />
+                            <Button fx:id="changeDirection" text="change direction" onAction="#handleChangeDirection" />
+                            <Button fx:id="nextWord" text="next >" onAction="#handleNextWord" />
+                        </HBox>
+                    </VBox>
+                </StackPane>
             </content>
         </Tab>
 
