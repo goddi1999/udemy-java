@@ -73,10 +73,8 @@ public class  Game {
                 nextCard = false;
                 logAllCards();
 
-            } else if (input.equals("y")){
-               nextCard = true;
-            }else {
-                nextCard  = false;
+            } else {
+                nextCard = input.equals("y");
             }
         }
    }

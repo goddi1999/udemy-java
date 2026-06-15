@@ -3,6 +3,8 @@
  */
 package org.example;
 
+import java.util.Scanner;
+
 
 public class App {
     public String getGreeting() {
@@ -14,5 +16,30 @@ public class App {
 
         Robot myRobot = new Robot();
         System.out.println("reward: " + myRobot.getState());
+
+        Scanner scanner = new Scanner(System.in);
+
+        int availableSteps = 8;
+
+        while (availableSteps > 0) {
+            System.out.println("What should the robot do? (idle/recharge/work)");
+            String input = scanner.nextLine();
+
+        if (input.equals("idle")) {
+            availableSteps--;
+            System.out.println(myRobot.idle());
+        } else if (input.equals("recharge")) {
+            availableSteps--;
+            System.out.println(myRobot.recharge());
+        } else if (input.equals("work")) {
+            availableSteps--;
+            System.out.println(myRobot.work());
+        }
+        
+        else {
+            System.out.println("invalid input type idle/recharge/work...");
+        }
+}
+
     }
 }

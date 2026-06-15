@@ -9,10 +9,19 @@ class Robot {
         EMPTY
     }
 
-    RobotState state = RobotState.HIGH;
-    int reward = 0; 
-    boolean asleep = false;
+    private RobotState state = RobotState.HIGH;
+    private int reward = 0; 
+    private boolean asleep = false;
 
+    public Robot(Integer reward, RobotState state, boolean asleep) {
+        this.reward = reward;
+        this.state = state;
+        this.asleep = asleep;
+    }
+
+    public Robot(){
+
+    }
 
     public Integer getReward(){
         return reward;
@@ -26,6 +35,17 @@ class Robot {
         return asleep;
     }
 
+        public void setReward(Integer reward) {
+        this.reward = reward;
+    }
+
+    public void setState(RobotState state) {
+        this.state = state;
+    }
+
+    public void setAsleep(boolean asleep) {
+        this.asleep = asleep;
+    }
     // HIGH -> LOW -> EMPTY
     public void getNext(){
         RobotState currentState = state;
@@ -46,32 +66,56 @@ class Robot {
     // idle  dafür einen Reward von +1.
     // Gibt die Nachricht
 
-    public void idle(){
-        reward = reward + 1;
-        System.out.println("Idling successful, gained one reward, now in state  " +  getState());
+    public String idle(){
+        reward =+ 1;
+        return  "Idling successful, gained one reward, now in state  " +  getState();
     }
 
 
     // Roboter bereits in State HIGH ist, passiert nichts und eine entsprechende Nachricht wird zurückgegeben.
     // allen anderen Fällen wird der Zustand auf HIGH gesetzt und ebenfalls eine Nachricht zurückgegeben.
-    public void recharge(){
+    public String recharge(){
+        String message = "";
 
         RobotState currentState = getState();
 
         switch(currentState) {
             case HIGH:
-                System.out.println("you already on state high");
+                message = "WARNING: you already on state high not need to recharge";
                 break;
             case LOW:  case EMPTY:
                 currentState = RobotState.HIGH;
-                System.out.println("recharges succeeded: " + currentState);
+                message = "SUCCESS: recharges succeeded: " + currentState;
                 break;
         }
+
+
+        return message;
     }
 
     // zufällige zahl ermittelt
-    public void work(){
-        double randomNum = (Math.random() * 10) + 0;
+    public String work(){
+        double randomNum = (Math.random());
+        String message = "";
+        int currentReward = getReward();
+        boolean currentAsleep = getAsleep();
+
+
+        if(randomNum  <= 0.60){
+            getNext();
+        }
+
+        if(state == RobotState.EMPTY){
+            setAsleep(!currentAsleep);
+            setReward( currentReward =- 5);
+            message = "MODE-EMPTY: Robot is empty asleep";
+        }else {
+            setReward( currentReward =+ 5);
+            message = "MODEW-WORKING: working";
+
+        }
+
+        return message;
     }
   
 

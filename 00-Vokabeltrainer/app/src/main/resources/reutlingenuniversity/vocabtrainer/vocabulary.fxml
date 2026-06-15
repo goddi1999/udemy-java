@@ -68,7 +68,7 @@
                         <HBox spacing="10" alignment="CENTER">
                             <Button fx:id="trainButton" text="check answer" onAction="#handleCheckAnswer" />
                             <Button fx:id="changeDirection" text="change direction" onAction="#handleChangeDirection" />
-                            <Button fx:id="nextWord" text="next >" onAction="#handleNextWord" />
+                            <Button fx:id="nextWord" text="Next" onAction="#handleNextWord" />
                         </HBox>
                     </VBox>
                 </StackPane>
