@@ -22,7 +22,7 @@ public class App {
             String password;
             switch (selection) {
                 case "1":
-                    System.out.println("LOGIN: \n");
+                    System.out.println("REGISTER: \n");
                     System.out.println("Please enter your username: ");
                     username = scanner.nextLine();
                     System.out.println("Please enter your password: ");
@@ -37,7 +37,7 @@ public class App {
                     }
                 break;
                 case "2":
-                    System.out.println("REGISTER: \n");
+                    System.out.println("LOGIN: \n");
                     System.out.println("Please enter your username: ");
                     username = scanner.nextLine();
                     System.out.println("Please enter your password: ");
