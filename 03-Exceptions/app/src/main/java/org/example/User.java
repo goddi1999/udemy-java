@@ -8,10 +8,10 @@ class User {
 
     public User(){}
 
-    public User(String username, String password, int attempts){
+    public User(String username, String password){
         this.username =  username;
         this.password =  password;
-        this.attempts =  attempts;
+        this.attempts =  3;
     }
 
     public String getUsername() {
@@ -41,9 +41,13 @@ class User {
     public void updateAttempts(){
         int currentAttempts = getAttempts();
         if(currentAttempts != 0){
-            
-            
+            currentAttempts =- 1;
         }
     }
+
+    public void resetAttempts(){
+        setAttempts(3);
+    }
+
 
 }
