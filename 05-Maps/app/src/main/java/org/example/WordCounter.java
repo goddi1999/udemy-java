@@ -35,20 +35,30 @@ public class WordCounter {
         this.count = count;
     }
 
+    // Fügt ein Wort zum Zähler hinzu und erhöht die Häufigkeit des Wortes
+    // Beispiel: Bei der Eingabe "Test" wird Test: 1 gespeichert, bei erneuter Eingabe des Wortes wird Test: 2 gespeichert
+
     public void addToCounter(String input){
         if(wordMap.containsKey(input)){
             int currentWordCount = wordMap.get(input);
-            wordMap.put(input, currentWordCount +1 );
+            wordMap.put(input, currentWordCount + 1 );
         }else {
             wordMap.put(input, 1);
         }
 
     }
 
-    public void getWordCounts(){
-        for (Map.Entry<String, Integer> wordObject : wordMap.entrySet()) {
-            System.out.println("word: " + wordObject.getKey() + " " + "count: " + wordObject.getValue());
+    // Gibt die gespeicherten Wörter und deren Häufigkeiten zurück
+   public Map<String, Integer> getWordCounts() {
+    return wordMap;
+}
+
+    public int getTotalWords() {
+        int total = 0;
+        for (int count : wordMap.values()) {
+            total += count;
         }
+        return total;
     }
 
     public String getMostFrequentWord(){
@@ -68,7 +78,6 @@ public class WordCounter {
     }
 
     public String getLeastFrequentWord(){
-
         String minWord = "";
         int minWordCount = Integer.MAX_VALUE;
           for (Map.Entry<String, Integer> wordObject : wordMap.entrySet()) {
@@ -84,9 +93,12 @@ public class WordCounter {
             }
 
         }
-
         return minWord;
+    }
 
+    @Override
+    public String  toString(){
+        return "word: " + getWord() + " " + "count: " + getCount();
     }
 
 }

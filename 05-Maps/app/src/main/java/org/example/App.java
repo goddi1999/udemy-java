@@ -3,11 +3,13 @@
  */
 package org.example;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner();
+        Scanner scanner = new Scanner(System.in);
+        WordCounter wordCounter = new WordCounter();
         boolean exit = false;
         while (!exit) {
             System.out.println("Please select an option");
@@ -18,9 +20,37 @@ public class App {
             System.out.println("5: Get least frequent word (last lexicographic)");
             System.out.println("0: Exit");
             String choice = scanner.nextLine();
+
             switch (choice) {
                 case "1":
-                    // Implement your solution
+                    System.out.println("Write the word....");
+                    String userInput = scanner.nextLine();
+                    wordCounter.addToCounter(userInput);
+                    System.out.println("word added...");
+                    break;
+
+                case "2":
+                    Map<String, Integer> wordCounts = wordCounter.getWordCounts();
+                    System.out.println("wordCounts:>> " + wordCounts);
+                    break;
+
+                case "3":
+                    System.out.println("total number of words: " + wordCounter.getTotalWords());
+                    break;
+
+                case "4":
+                    String mostFrequentWord = wordCounter.getMostFrequentWord();
+                    System.out.println("most frequent word: " + mostFrequentWord);
+                    break;
+
+                case "5":
+                    String leastFrequentWord = wordCounter.getLeastFrequentWord();
+                    System.out.println("least frequent word: " + leastFrequentWord);
+                    break;
+
+                case "0":
+                    exit = true;
+                    break;
             }
         }
     }
