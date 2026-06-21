@@ -161,6 +161,12 @@ public class VocabularyController {
                     vocabularyList.add(vocabularyItem);
                 }
             }
+
+            if (line == null) {
+                statusLabel.setText("Done successfully load");
+                statusLabel.setStyle("-fx-text-fill: green;");
+            }
+
         } catch (FileNotFoundException e) {
             statusLabel.setText("Error loading file!");
             statusLabel.setStyle("-fx-text-fill: red;");

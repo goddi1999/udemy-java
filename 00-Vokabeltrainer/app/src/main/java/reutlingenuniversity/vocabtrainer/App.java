@@ -3,6 +3,8 @@
  */
 package reutlingenuniversity.vocabtrainer;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +19,7 @@ public class App extends Application{
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource ("vocabulary.fxml"));
 
         Scene scene = new Scene(root, 720, 800);
