@@ -22,6 +22,9 @@ public class App extends Application{
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource ("vocabulary.fxml"));
 
+        Person p1 = new Person("fred");
+
+        System.out.println("p1: " + p1.toString());
         Scene scene = new Scene(root, 720, 800);
         stage.setTitle("Vocabulary Trainer");
         stage.setScene(scene);
