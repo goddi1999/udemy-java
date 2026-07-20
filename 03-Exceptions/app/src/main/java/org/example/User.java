@@ -14,6 +14,10 @@ class User {
         this.attempts =  3;
     }
 
+    public int wise(){
+        return 2;
+    }
+
     public String getUsername() {
         return username;
     }
