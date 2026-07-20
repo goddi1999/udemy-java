@@ -20,40 +20,63 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+/**
+ * FXML controller for the social platform UI.
+ * Handles creating, editing, liking, and deleting a post,
+ * as well as adding and removing comments in the feed and comments tab.
+ */
 public class PostController implements Initializable {
 
+    /** Input field for creating a new post. */
     @FXML
     private TextField postInput;
 
+    /** Button that creates a new post from {@link #postInput}. */
     @FXML
     private Button postButton;
 
+    /** Input field for adding a comment to the current post. */
     @FXML
     private TextField commentInput;
 
+    /** Button that adds a comment from {@link #commentInput}. */
     @FXML
     private Button commentButton;
 
+    /** Accordion that displays the current post and its comments. */
     @FXML
     private Accordion feedAccordion;
 
+    /** Button that opens a dialog to edit the current post. */
     @FXML
     private Button editPostButton;
 
+    /** Button that deletes the current post and all linked comments. */
     @FXML
     private Button deletePostButton;
 
+    /** Button that increments the like count of the current post. */
     @FXML
     private Button likePostButton;
 
+    /** Label that shows the current like count. */
     @FXML
     private Label likesLabel;
 
+    /** Container in the Comments tab that lists all comments. */
     @FXML
     private VBox commentsBox;
 
+    /** The currently active post, or {@code null} if none exists. */
     private Post post;
 
+    /**
+     * Initializes the controller after FXML loading.
+     * Creates a sample post with hardcoded comments and refreshes the UI.
+     *
+     * @param location  the location used to resolve relative paths for the root object
+     * @param resources the resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         post = new Post(
@@ -68,6 +91,10 @@ public class PostController implements Initializable {
         refreshView();
     }
 
+    /**
+     * Creates a new post from the post input field.
+     * Replaces any existing post and clears its previous comments.
+     */
     @FXML
     private void addPost() {
         String message = postInput.getText().trim();
@@ -80,6 +107,10 @@ public class PostController implements Initializable {
         refreshView();
     }
 
+    /**
+     * Adds a new comment to the current post from the comment input field.
+     * Does nothing if there is no post or the input is empty.
+     */
     @FXML
     private void addComment() {
         if (post == null) {
@@ -96,6 +127,10 @@ public class PostController implements Initializable {
         refreshView();
     }
 
+    /**
+     * Opens a dialog to edit the current post message.
+     * Shows a warning alert if the new message is empty.
+     */
     @FXML
     private void editPost() {
         if (post == null) {
@@ -121,6 +156,9 @@ public class PostController implements Initializable {
         });
     }
 
+    /**
+     * Deletes the current post and clears all linked comments from the UI.
+     */
     @FXML
     private void deletePost() {
         if (post == null) {
@@ -132,6 +170,9 @@ public class PostController implements Initializable {
         refreshView();
     }
 
+    /**
+     * Increments the like count of the current post and updates the likes label.
+     */
     @FXML
     private void likePost() {
         if (post == null) {
@@ -142,6 +183,9 @@ public class PostController implements Initializable {
         updateLikesLabel();
     }
 
+    /**
+     * Updates the likes label to match the current post's like count.
+     */
     private void updateLikesLabel() {
         if (post == null) {
             likesLabel.setText("0 likes");
@@ -151,6 +195,10 @@ public class PostController implements Initializable {
         likesLabel.setText(post.getLikes() + " likes");
     }
 
+    /**
+     * Rebuilds the feed accordion and comments list from the current post.
+     * Disables post actions when no post exists.
+     */
     private void refreshView() {
         feedAccordion.getPanes().clear();
         commentsBox.getChildren().clear();
@@ -178,6 +226,13 @@ public class PostController implements Initializable {
         }
     }
 
+    /**
+     * Builds an accordion pane for the given post.
+     * The pane title is the post message; the content lists its comments.
+     *
+     * @param post the post to display
+     * @return a titled pane representing the post
+     */
     private TitledPane createPostPane(Post post) {
         VBox commentsOnly = new VBox(8);
         commentsOnly.setPadding(new javafx.geometry.Insets(4));
@@ -191,6 +246,12 @@ public class PostController implements Initializable {
         return new TitledPane(post.getMessage(), commentsOnly);
     }
 
+    /**
+     * Builds a comment row for the Comments tab with text, date, and a delete button.
+     *
+     * @param comment the comment to display
+     * @return an {@link HBox} row for the comment
+     */
     private HBox createCommentRow(Comment comment) {
         Label contentLabel = new Label(comment.getComment());
         contentLabel.getStyleClass().add("comment-text");
