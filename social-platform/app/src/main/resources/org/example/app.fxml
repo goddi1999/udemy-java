@@ -52,10 +52,21 @@
             <VBox styleClass="content-panel" spacing="10" alignment="CENTER">
                 <Label text="Current post" styleClass="field-label"/>
                 <Accordion fx:id="feedAccordion" prefWidth="420" maxWidth="420"/>
-                <Button fx:id="deletePostButton"
-                        text="Delete Post"
-                        styleClass="button-secondary"
-                        onAction="#deletePost"/>
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="editPostButton"
+                            text="Edit Post"
+                            styleClass="button-primary"
+                            onAction="#editPost"/>
+                    <Button fx:id="deletePostButton"
+                            text="Delete Post"
+                            styleClass="button-secondary"
+                            onAction="#deletePost"/>
+                    <Button fx:id="likePostButton"
+                            text="Like"
+                            styleClass="button-action"
+                            onAction="#likePost"/>
+                    <Label fx:id="likesLabel" text="0 likes" styleClass="page-subtitle"/>
+                </HBox>
             </VBox>
 
         </VBox>

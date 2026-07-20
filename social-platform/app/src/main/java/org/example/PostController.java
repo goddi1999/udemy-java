@@ -9,9 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -35,7 +38,16 @@ public class PostController implements Initializable {
     private Accordion feedAccordion;
 
     @FXML
+    private Button editPostButton;
+
+    @FXML
     private Button deletePostButton;
+
+    @FXML
+    private Button likePostButton;
+
+    @FXML
+    private Label likesLabel;
 
     @FXML
     private VBox commentsBox;
@@ -85,6 +97,31 @@ public class PostController implements Initializable {
     }
 
     @FXML
+    private void editPost() {
+        if (post == null) {
+            return;
+        }
+
+        TextInputDialog dialog = new TextInputDialog(post.getMessage());
+        dialog.setTitle("Edit Post");
+        dialog.setHeaderText("Edit your post");
+        dialog.setContentText("Post:");
+
+        dialog.showAndWait().ifPresent(newMessage -> {
+            String trimmed = newMessage.trim();
+            if (trimmed.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Post cannot be empty.", ButtonType.OK);
+                alert.setHeaderText(null);
+                alert.showAndWait();
+                return;
+            }
+
+            post.setMessage(trimmed);
+            refreshView();
+        });
+    }
+
+    @FXML
     private void deletePost() {
         if (post == null) {
             return;
@@ -95,18 +132,43 @@ public class PostController implements Initializable {
         refreshView();
     }
 
+    @FXML
+    private void likePost() {
+        if (post == null) {
+            return;
+        }
+
+        post.incrementLikes();
+        updateLikesLabel();
+    }
+
+    private void updateLikesLabel() {
+        if (post == null) {
+            likesLabel.setText("0 likes");
+            return;
+        }
+
+        likesLabel.setText(post.getLikes() + " likes");
+    }
+
     private void refreshView() {
         feedAccordion.getPanes().clear();
         commentsBox.getChildren().clear();
 
         if (post == null) {
+            editPostButton.setDisable(true);
             deletePostButton.setDisable(true);
+            likePostButton.setDisable(true);
             commentButton.setDisable(true);
+            updateLikesLabel();
             return;
         }
 
+        editPostButton.setDisable(false);
         deletePostButton.setDisable(false);
+        likePostButton.setDisable(false);
         commentButton.setDisable(false);
+        updateLikesLabel();
 
         feedAccordion.getPanes().add(createPostPane(post));
         feedAccordion.setExpandedPane(feedAccordion.getPanes().get(0));
