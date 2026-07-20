@@ -3,12 +3,30 @@
  */
 package org.example;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.io.IOException;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
+public class App extends Application{ 
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource ("app.fxml"));
+
+        Scene scene = new Scene(root, 720, 800);
+        stage.setTitle("Vocabulary Trainer");
+        stage.setScene(scene);
+        stage.show();
+
+
     }
 }
