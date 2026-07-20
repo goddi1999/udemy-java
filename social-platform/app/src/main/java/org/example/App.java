@@ -11,8 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
-public class App extends Application{ 
+public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -20,13 +19,13 @@ public class App extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource ("app.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
 
         Scene scene = new Scene(root, 720, 800);
-        stage.setTitle("Vocabulary Trainer");
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+        stage.setTitle("Social Platform");
         stage.setScene(scene);
         stage.show();
-
-
     }
 }

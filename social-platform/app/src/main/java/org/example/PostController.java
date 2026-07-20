@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -116,11 +117,13 @@ public class PostController implements Initializable {
     }
 
     private TitledPane createPostPane(Post post) {
-        VBox commentsOnly = new VBox(6);
-        commentsOnly.setStyle("-fx-padding: 8;");
+        VBox commentsOnly = new VBox(8);
+        commentsOnly.setPadding(new javafx.geometry.Insets(4));
 
         for (Comment comment : post.getComments()) {
-            commentsOnly.getChildren().add(new Label(comment.getComment()));
+            Label label = new Label(comment.getComment());
+            label.getStyleClass().add("feed-comment");
+            commentsOnly.getChildren().add(label);
         }
 
         return new TitledPane(post.getMessage(), commentsOnly);
@@ -128,16 +131,23 @@ public class PostController implements Initializable {
 
     private HBox createCommentRow(Comment comment) {
         Label contentLabel = new Label(comment.getComment());
+        contentLabel.getStyleClass().add("comment-text");
+        contentLabel.setWrapText(true);
         HBox.setHgrow(contentLabel, Priority.ALWAYS);
 
         Label dateLabel = new Label(comment.getDate());
+        dateLabel.getStyleClass().add("comment-date");
 
         Button deleteButton = new Button("Delete");
+        deleteButton.getStyleClass().add("button-action");
         deleteButton.setOnAction(event -> {
             post.removeComment(comment);
             refreshView();
         });
 
-        return new HBox(12, contentLabel, dateLabel, deleteButton);
+        HBox row = new HBox(12, contentLabel, dateLabel, deleteButton);
+        row.setAlignment(Pos.CENTER_LEFT);
+        row.getStyleClass().add("comment-row");
+        return row;
     }
 }

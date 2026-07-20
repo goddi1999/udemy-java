@@ -1,0 +1,290 @@
+/* ==========================================================================
+   COLOR PALETTE REFERENCE:
+   Primary Blue:   #0066CC
+   Secondary Gray: #A2AAAD
+   Dark Text:      #1D1D1F
+   Background Off: #F5F5F7
+   Pure White:     #FFFFFF
+   Border Light:   #E1E4E8
+   ========================================================================== */
+
+/* 1. Global Scene & Base Text Settings */
+.root {
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #1D1D1F;
+}
+
+/* 2. Tab layout */
+.tab-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-tab-min-width: 100px;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 10px 20px;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #F5F5F7;
+    -fx-background-radius: 8px 8px 0 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab .tab-label {
+    -fx-text-fill: #A2AAAD;
+    -fx-font-weight: bold;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected .tab-label {
+    -fx-text-fill: #0066CC;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E1E4E8;
+    -fx-border-width: 0 0 1 0;
+}
+
+.tab-pane > .tab-content-area {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 0;
+}
+
+/* 3. Page layout */
+.page {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 32px;
+    -fx-background-color: #FFFFFF;
+}
+
+.page-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1D1D1F;
+}
+
+.page-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #A2AAAD;
+}
+
+.field-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1D1D1F;
+}
+
+.form-block {
+    -fx-spacing: 8px;
+    -fx-alignment: center-left;
+    -fx-pref-width: 420px;
+    -fx-max-width: 420px;
+}
+
+.form-row {
+    -fx-spacing: 10px;
+    -fx-alignment: center-left;
+}
+
+.input-field {
+    -fx-pref-width: 300px;
+    -fx-min-width: 300px;
+    -fx-max-width: 300px;
+}
+
+.content-panel {
+    -fx-pref-width: 420px;
+    -fx-max-width: 420px;
+}
+
+/* 4. Form Controls & Text Inputs */
+.text-field, .text-area {
+    -fx-background-color: #F5F5F7;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1.5px;
+    -fx-padding: 10px 14px;
+    -fx-text-fill: #1D1D1F;
+    -fx-prompt-text-fill: #A2AAAD;
+}
+
+.text-field:focused, .text-area:focused {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #0066CC;
+}
+
+/* 5. Primary Button Style */
+.button-primary {
+    -fx-background-color: #0066CC;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-padding: 8px 20px;
+    -fx-cursor: hand;
+    -fx-pref-width: 110px;
+}
+
+.button-primary:hover {
+    -fx-background-color: #0052A3;
+}
+
+.button-primary:disabled {
+    -fx-background-color: #A2AAAD;
+    -fx-text-fill: #F5F5F7;
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* 6. Secondary / Outline Button Style */
+.button-secondary {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1D1D1F;
+    -fx-border-color: #A2AAAD;
+    -fx-border-width: 1px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 20px;
+    -fx-cursor: hand;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #F5F5F7;
+    -fx-border-color: #1D1D1F;
+}
+
+.button-secondary:disabled {
+    -fx-border-color: #E1E4E8;
+    -fx-text-fill: #A2AAAD;
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* 7. Action / Delete Button */
+.button-action {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0066CC;
+    -fx-background-radius: 50%;
+    -fx-padding: 6px 10px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.button-action:hover {
+    -fx-background-color: #F5F5F7;
+}
+
+.button-action:disabled {
+    -fx-text-fill: #A2AAAD;
+    -fx-cursor: default;
+}
+
+/* 8. Accordion */
+.accordion {
+    -fx-background-color: transparent;
+}
+
+.accordion > .titled-pane > .title {
+    -fx-background-color: #F5F5F7;
+    -fx-background-radius: 10px;
+    -fx-border-color: #E1E4E8;
+    -fx-border-radius: 10px;
+    -fx-padding: 12px 14px;
+    -fx-font-weight: bold;
+}
+
+.accordion > .titled-pane > .title:hover {
+    -fx-background-color: #EAEAED;
+}
+
+.accordion > .titled-pane > *.content {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E1E4E8;
+    -fx-border-width: 0 1 1 1;
+    -fx-border-radius: 0 0 10px 10px;
+    -fx-padding: 12px;
+}
+
+.feed-comment {
+    -fx-text-fill: #1D1D1F;
+    -fx-padding: 4px 0;
+}
+
+/* 9. Cards & comment rows */
+.card-panel {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E1E4E8;
+    -fx-border-width: 1px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-padding: 14px;
+}
+
+.card-panel:hover {
+    -fx-background-color: #F5F5F7;
+}
+
+.comment-row {
+    -fx-alignment: center-left;
+    -fx-spacing: 12px;
+    -fx-padding: 12px 14px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E1E4E8;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.comment-text {
+    -fx-text-fill: #1D1D1F;
+    -fx-wrap-text: true;
+}
+
+.comment-date {
+    -fx-text-fill: #A2AAAD;
+    -fx-font-size: 12px;
+}
+
+/* 10. ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
+
+/* 11. ListView (kept for reuse) */
+.list-view {
+    -fx-background-color: #FFFFFF;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.list-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #1D1D1F;
+    -fx-padding: 12px 16px;
+    -fx-border-color: #E1E4E8;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:hover {
+    -fx-background-color: #F5F5F7;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #F5F5F7;
+    -fx-text-fill: #1D1D1F;
+}
