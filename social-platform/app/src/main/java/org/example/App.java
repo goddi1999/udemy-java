@@ -22,7 +22,6 @@ public class App extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
 
         Scene scene = new Scene(root, 720, 800);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         stage.setTitle("Social Platform");
         stage.setScene(scene);
