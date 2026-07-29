@@ -21,7 +21,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
 
-        Scene scene = new Scene(root, 720, 800);
+        Scene scene = new Scene(root);
 
         stage.setTitle("Social Platform");
         stage.setScene(scene);
